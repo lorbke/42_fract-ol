@@ -1,0 +1,54 @@
+
+
+------IMPORTANT------
+gcc main.c libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
+-Ofast compiling flag to make it much faster
+man man 3 math
+
+
+
+------REQUIREMENTS-------
+mandatory
+- global variables forbidden
+- Julia and Mandelbrot set
+- infinite zooming of the mouse wheel + out zooming
+- passed parameters can create different Julia sets
+- parameter will also define kind of fractal displayed
+- use colors, preferably psychedelic effects, to show depth
+- has to be displayed in window
+- esc closes the window
+- clicking on red cross must close the window and quit in clean way
+- mandatory: use of images of minilibx
+
+bonus
+- a third fractal set
+- zoom following mouse position
+- moving view by pressing arrow keys 
+- shifting color range
+
+
+
+-------FRACTALS--------
+- number below 1 ^2 are stable 
+- if you add another number 
+- black = stable region, other colors = different levels of unstableness
+- formula: z^2 * c
+	- z is a 2 dimensional complex number (x + yi) (i standing for imaginary)
+
+
+
+-------LOGIC-------
+- input parsing
+
+- create window
+	- key hooks
+	- show instructions on screen
+
+- fractal logic
+	- color logic
+
+- exit window
+
+
+
+// struct to pass around data light width, height etc.
