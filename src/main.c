@@ -6,16 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:35 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/16 16:01:04 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/16 16:25:14 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42/include/MLX42/MLX42.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-// #include <math.h>
+#include "fractol.h"
 
 void	hook(void *param)
 {
@@ -123,7 +118,7 @@ int	get_iter(int x, int y, int width, int height, int max)
 	return (iter);
 }
 
-void	draw_mandelbrot(mlx_image_t *img, int width, int height, int color)
+void	draw_mandelbrot(mlx_image_t *img, int width, int height)
 {
 	int		x;
 	int		y;
@@ -164,7 +159,7 @@ int	main(void)
 	// memset(back->pixels, 255, back->width * back->height * sizeof(int));
 	mlx_image_to_window(mlx, back, 0,0);
 
-	draw_mandelbrot(back, width, height, 0);
+	draw_mandelbrot(back, width, height);
 	// printf("%u\n", convert_to_hexcode(69, 202, 88, 255));
 
 	mlx_loop(mlx);
