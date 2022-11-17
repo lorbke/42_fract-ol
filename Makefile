@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:02:15 by lorbke            #+#    #+#              #
-#    Updated: 2022/11/16 18:32:30 by lorbke           ###   ########.fr        #
+#    Updated: 2022/11/16 19:37:18 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ FLAGS = #-Wall -Wextra -Werror
 
 # path macros
 LIB_PATH = lib
+LFT_PATH = $(LIB_PATH)/libft
+LFT_INC = $(LFT_PATH)/includes
 MLX_PATH = $(LIB_PATH)/MLX42
 MLX_INC = $(MLX_PATH)/include/MLX42
 INC = includes
@@ -35,6 +37,7 @@ SRC = fractal.c utils.c main.c
 OBJ = $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # archive macros
+LFT_AR = libft.a
 MLX_AR = libmlx42.a
 
 # default target
@@ -43,11 +46,12 @@ default: makedir all
 # file targets
 ${NAME}: $(OBJ)
 	@make -C $(MLX_PATH)
-	${CC} ${FLAGS} $(OBJ) ${MLX_PATH}/${MLX_AR} $(GL_FLAG) -L$(GL_AR) -o ${NAME}
+	@make -C $(LFT_PATH)
+	${CC} ${FLAGS} $(OBJ) ${MLX_PATH}/${MLX_AR} ${LFT_PATH}/${LFT_AR} $(GL_FLAG) -L$(GL_AR) -o ${NAME}
 	@echo "make: fractol success!"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	${CC} ${FLAGS} -I$(INC) -I$(MLX_INC) -c $< -o $@ 
+	${CC} ${FLAGS} -I$(INC) -I$(MLX_INC) -I$(LFT_INC) -c $< -o $@ 
 
 # phony targets
 all: ${NAME}
@@ -61,6 +65,7 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 	cd $(MLX_PATH) && $(MAKE) fclean
+	cd $(LFT_PATH) && $(MAKE) fclean
 
 re: fclean makedir all
 

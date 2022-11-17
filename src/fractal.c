@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:27:10 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/16 18:27:49 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:22:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int	convert_to_color(int n, int max)
 	return (0xFF);
 }
 
-int	get_iter(int x, int y, int width, int height, int max)
+int	get_iter(int x, int y, t_data *data)
 {
 	int		iter;
 	double	fx;
@@ -50,12 +50,12 @@ int	get_iter(int x, int y, int width, int height, int max)
 	double	ty;
 	double	temp;
 
-	fx = convert_x(x, width);
-	fy = convert_x(y, height);
+	fx = convert_x(x, data);
+	fy = convert_x(y, data);
 	tx = 0;
 	ty = 0;
 	iter = 0;
-	while (tx * tx + ty * ty <= 4 && iter < max)
+	while (tx * tx + ty * ty <= 4 && iter < data->max_iter)
 	{
 		temp = tx * tx - ty * ty + fx;
 		ty = 2 * tx * ty + fy;
@@ -65,19 +65,19 @@ int	get_iter(int x, int y, int width, int height, int max)
 	return (iter);
 }
 
-void	draw_mandelbrot(mlx_image_t *img, int width, int height)
+void	mandelbrot(t_data *data)
 {
 	int		x;
 	int		y;
 
 	x = 0;
-	while (x < width)
+	while (x < data->width)
 	{
 		y = 0;
-		while (y < height)
+		while (y < data->height)
 		{
-			mlx_put_pixel(img, x, y, convert_to_color
-				(get_iter(x, y, width, height, 100), 100));
+			mlx_put_pixel(data->img, x, y, convert_to_color
+				(get_iter(x, y, data), data->max_iter));
 			y++;
 		}
 		x++;

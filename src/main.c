@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:35 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/16 18:28:04 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:19:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,83 @@ void	hook(void *param)
 		mlx_close_window(param);
 }
 
-int	main(void)
+void	zoom_hook(double xdelta, double ydelta, void *param)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*back;
-	int			width;
-	int			height;
+	t_data	*data;
 
-	width = 1000;
-	height = 1000;
+	data = param;
+	if (ydelta > 0)
+	{
+		data->scale -= 0.1;
+		data->fract->type(data);
+	}
+	else if (ydelta < 0)
+	{
+		data->scale += 0.1;
+		data->fract->type(data);
+	}
+}
 
-	// printf("%f\n", convert_x(0, width));
-	// printf("%f\n", convert_y(0, height));
-	mlx = mlx_init(width, height, "fract-ol", true);
-	if (!mlx)
-		exit(EXIT_FAILURE);
+void	mouse_hook(double xpos, double ypos, void *param)
+{
+	t_data	*data;
 
-	mlx_loop_hook(mlx, &hook, mlx);
+	data = param;
+	data->xoffset = xpos;
+	// data->xoffset = xpos / (double) data->width;
+	// data->xoffset *= data->scale;
+	// data->xoffset += -(data->scale / 2);
+	// data->yoffset = ypos / (double) data->height;
+	// data->yoffset *= -data->scale;
+	// data->yoffset += data->scale / 2;
+}
 
-	back = mlx_new_image(mlx, width, height);
+void	data_init(t_data *data)
+{
+	data->width = 1000;
+	data->height = 1000;
+	data->max_iter = 30;
+	data->scale = 4;
+	data->xoffset = 0;
+	data->yoffset = 0;
+	data->mlx = mlx_init(data->width, data->height, "fract-ol", false);
+	data->img = mlx_new_image(data->mlx, data->width, data->height);
+}
+
+t_fract	*parse(char *argv[], t_fract *fract)
+{
+	fract = malloc(sizeof(t_fract));
+	if (ft_strlen(argv[1]) > 10)
+		return (NULL);
+	if (!ft_strncmp(argv[1], "Mandelbrot", 10))
+		fract->type = &mandelbrot;
+	else
+		return (NULL);
+	fract->c = 0;
+	return (fract);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_data data;
+
+	if (argc < 2)
+		return (0);
+	data.fract = parse(argv, data.fract);
+	if (!data.fract)
+		return (0);
+	data_init(&data);
+
+	mlx_loop_hook(data.mlx, &hook, data.mlx);
+	mlx_loop_hook(data.mlx, &hook, data.mlx);
+	mlx_scroll_hook(data.mlx, &zoom_hook, &data);
+	mlx_cursor_hook(data.mlx, &mouse_hook, &data);
+
 	// memset(back->pixels, 255, back->width * back->height * sizeof(int));
-	mlx_image_to_window(mlx, back, 0,0);
+	mlx_image_to_window(data.mlx, data.img, 0,0);
 
-	draw_mandelbrot(back, width, height);
-	// printf("%u\n", convert_to_hexcode(69, 202, 88, 255));
+	mlx_loop(data.mlx);
 
-	mlx_loop(mlx);
-
-	mlx_terminate(mlx);
+	mlx_terminate(data.mlx);
 	return (0);
 }

@@ -38,16 +38,18 @@ bonus
 
 
 -------LOGIC-------
-- input parsing
+main
 
-- create window
-	- key hooks
-	- show instructions on screen
+parsing
+	- which fractal
+	- saves values in struct
 
-- fractal logic
-	- color logic
+fractals
+	-generates and colors fractal at given img dimensions
 
-- exit window
+zoom
+	resizing
+
 
 
 
