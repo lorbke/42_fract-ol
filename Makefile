@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:02:15 by lorbke            #+#    #+#              #
-#    Updated: 2022/11/16 19:37:18 by lorbke           ###   ########.fr        #
+#    Updated: 2022/11/20 23:57:59 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RM = rm -f
 GL_AR = "/Users/$(USER)/.brew/opt/glfw/lib/"
 GL_FLAG = -lglfw
 ADD_FLAGS = #-I include
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -O3#-Wall -Wextra -Werror
 
 # path macros
 LIB_PATH = lib

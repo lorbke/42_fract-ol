@@ -6,11 +6,23 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:27:10 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/17 01:22:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 00:06:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	unsigned int	rgba;
+
+	rgba = r;
+	rgba = (rgba << 8) + g;
+	rgba = (rgba << 8) + b;
+	rgba = (rgba << 8) + a;
+	return (rgba);
+}
 
 unsigned int	convert_to_color(int n, int max)
 {
@@ -50,8 +62,8 @@ int	get_iter(int x, int y, t_data *data)
 	double	ty;
 	double	temp;
 
-	fx = convert_x(x, data);
-	fy = convert_x(y, data);
+	fx = convert_x(x, data) + data->xoffset;
+	fy = convert_y(y, data) + data->yoffset;
 	tx = 0;
 	ty = 0;
 	iter = 0;
@@ -64,6 +76,28 @@ int	get_iter(int x, int y, t_data *data)
 	}
 	return (iter);
 }
+
+// // BUG: Linux may experience a red hue instead due to endiannes
+// void mlx_draw_pixel(uint8_t* pixel, uint32_t color)
+// {
+// 	*(pixel++) = (uint8_t)(color >> 24);
+// 	*(pixel++) = (uint8_t)(color >> 16);
+// 	*(pixel++) = (uint8_t)(color >> 8);
+// 	*(pixel++) = (uint8_t)(color & 0xFF);
+// }
+
+//= Public =//
+
+// void ft_mlx_put_pixel (mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
+// {
+// 	// MLX_NONNULL(image);
+// 	// MLX_ASSERT(x < image->width, "Pixel is out of bounds");
+// 	// MLX_ASSERT(y < image->height, "Pixel is out of bounds");
+
+// 	uint32_t* pixelstart = (uint32_t *)(&image->pixels[(y * image->width + x) * 4]);
+// 	*pixelstart = color;
+// 	// mlx/_draw_pixel(pixelstart, color);
+// }
 
 void	mandelbrot(t_data *data)
 {
