@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:12:03 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/21 22:34:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:47:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ typedef struct s_data
 	int			height;
 	int			max_iter;
 	double		scale;
-	double		factor;
-	double		old_scale;
 	double		xoffset;
 	double		yoffset;
-	double		xtemp;
 	double		xaft;
 	double		yaft;
 	double		xbef;
