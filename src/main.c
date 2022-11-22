@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:35 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 15:33:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 16:13:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	key_hook(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		data->xoffset -= 0.1 * (data->scale / 4);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		data->xoffset += 0.1 * (data->scale / 4);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		data->xoffset -= 0.1 * (data->scale / 4);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
-		data->yoffset -= 0.1 * (data->scale / 4);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
 		data->yoffset += 0.1 * (data->scale / 4);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
+		data->yoffset -= 0.1 * (data->scale / 4);
 	data->fract->type(data);
 }
 

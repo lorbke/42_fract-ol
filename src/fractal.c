@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:27:10 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 14:45:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 16:12:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,26 @@ unsigned int	convert_to_color(int n, int max)
 		return (palette[i]);
 	}
 	return (0xFF);
+}
+
+double	convert_x(int x, t_data *data)
+{
+	double	result;
+
+	result = (double) x / data->width;
+	result *= data->scale;
+	result += -data->scale / 2;
+	return (result);
+}
+
+double	convert_y(int y, t_data *data)
+{
+	double	result;
+
+	result = (double) y / data->height;
+	result *= -data->scale;
+	result += data->scale / 2;
+	return (result);
 }
 
 int	get_iter(int x, int y, t_data *data)

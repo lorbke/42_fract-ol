@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:12:03 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 13:47:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 16:10:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ typedef struct s_data
 	double		scale;
 	double		xoffset;
 	double		yoffset;
-	double		xaft;
-	double		yaft;
-	double		xbef;
-	double		ybef;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_fract		*fract;
 }	t_data;
 
 // utils
-void	convert_mouse(t_data *data);
+void			convert_mouse(t_data *data);
 double			convert_x(int x, t_data *data);
 double			convert_y(int x, t_data *data);
 unsigned int	convert_to_hexcode(
