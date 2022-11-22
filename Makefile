@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:02:15 by lorbke            #+#    #+#              #
-#    Updated: 2022/11/22 16:00:39 by lorbke           ###   ########.fr        #
+#    Updated: 2022/11/22 17:12:26 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_PATH = src
 OBJ_PATH = obj
 
 # src and obj files macros
-SRC = fractal.c utils.c main.c
+SRC = fractal.c utils.c colors.c main.c
 OBJ = $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 
 # archive macros

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:35 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 16:13:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 23:28:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	key_hook(void *param)
 		data->yoffset += 0.1 * (data->scale / 4);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
 		data->yoffset -= 0.1 * (data->scale / 4);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		data->shift = 0;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_1))
+		data->palette = &wiki_palette;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_2))
+		data->palette = &br_palette;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_3))
+		data->palette = &psych_palette;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_4))
+		data->palette = &fortytwo_palette;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_MINUS))
+		data->max_iter -= 10;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_EQUAL))
+		data->max_iter += 10;
 	data->fract->type(data);
 }
 
@@ -71,9 +85,15 @@ void	zoom_hook(double xdelta, double ydelta, void *param)
 	x_bef = get_convmouse_x(data);
 	y_bef = get_convmouse_y(data);
 	if (ydelta > 0)
+	{
 		data->scale *= 0.9;
+		data->shift += 5;
+	}
 	else if (ydelta < 0)
+	{
 		data->scale *= 1.1;
+		data->shift -= 5;
+	}
 	data->xoffset += x_bef - get_convmouse_x(data);
 	data->yoffset += y_bef - get_convmouse_y(data);
 }
@@ -86,6 +106,8 @@ void	data_init(t_data *data)
 	data->scale = 4;
 	data->xoffset = 0;
 	data->yoffset = 0;
+	data->shift = 0;
+	data->palette = &wiki_palette;
 	data->mlx = mlx_init(data->width, data->height, "fract-ol", false);
 	data->img = mlx_new_image(data->mlx, data->width, data->height);
 }

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:12:03 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 16:10:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/22 23:13:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,32 @@ typedef struct s_fract
 
 typedef struct s_data
 {
-	int			width;
-	int			height;
-	int			max_iter;
-	double		scale;
-	double		xoffset;
-	double		yoffset;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_fract		*fract;
+	int				width;
+	int				height;
+	int				max_iter;
+	double			scale;
+	unsigned char	shift;
+	unsigned int	(*palette)();
+	double			xoffset;
+	double			yoffset;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	t_fract			*fract;
 }	t_data;
 
 // utils
 void			convert_mouse(t_data *data);
 double			convert_x(int x, t_data *data);
 double			convert_y(int x, t_data *data);
-unsigned int	convert_to_hexcode(
-					unsigned char r, unsigned char g,
-					unsigned char b, unsigned char a);
+
+// colors
+unsigned int	fortytwo_palette(int n);
+unsigned int	br_palette(int n);
+unsigned int	psych_palette(int n);
+unsigned int	wiki_palette(int n);
+unsigned int	convert_to_color(int n, int max, unsigned char shift, unsigned int (*palette)(int));
 
 // fractal
-unsigned int	convert_to_color(int n, int max);
 int				get_iter(int x, int y, t_data *data);
 void			mandelbrot(t_data *data);
 
