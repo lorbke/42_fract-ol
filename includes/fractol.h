@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:12:03 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 23:13:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/23 17:55:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 
 typedef struct s_fract
 {
-	int		c;
-	void	(*type)();
+	int		(*type)();
 }	t_fract;
 
 typedef struct s_data
@@ -37,6 +36,8 @@ typedef struct s_data
 	unsigned int	(*palette)();
 	double			xoffset;
 	double			yoffset;
+	double			cx;
+	double			cy;
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	t_fract			*fract;
@@ -55,8 +56,10 @@ unsigned int	wiki_palette(int n);
 unsigned int	convert_to_color(int n, int max, unsigned char shift, unsigned int (*palette)(int));
 
 // fractal
-int				get_iter(int x, int y, t_data *data);
-void			mandelbrot(t_data *data);
+int				mandelbrot(int x, int y, t_data *data);
+int				julia(int x, int y, t_data *data);
+int				tricorn(int x, int y, t_data *data);
+void			draw_fract(t_data *data);
 
 // main
 void			hook(void *param);

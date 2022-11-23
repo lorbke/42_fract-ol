@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:10:44 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 23:14:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/23 17:51:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,23 +91,8 @@ unsigned int	psych_palette(int n)
 	return (palette[i]);
 }
 
-unsigned int	fortytwo_palette(int n)
-{
-	int				i;
-	unsigned int	palette[5];
-	unsigned char	a;
-
-	a = (unsigned char)255;
-	i = n % 5;
-	palette[0] = convert_to_hexcode(255, 255, 255, a);
-	palette[2] = convert_to_hexcode(0, 0, 0, a);
-	palette[1] = convert_to_hexcode(25, 217, 230, a);
-	palette[3] = convert_to_hexcode(212, 43, 111, a);
-	palette[4] = convert_to_hexcode(91, 101, 100, a);
-	return (palette[i]);
-}
-
-unsigned int	convert_to_color(int n, int max, unsigned char shift, unsigned int (*palette)(int))
+unsigned int	convert_to_color(
+	int n, int max, unsigned char shift, unsigned int (*palette)(int))
 {
 	if (n < max && n > 0)
 	{

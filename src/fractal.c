@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 18:27:10 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/22 23:56:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/23 17:59:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double	convert_y(int y, t_data *data)
 	return (result);
 }
 
-int	get_iter(int x, int y, t_data *data)
+int	mandelbrot(int x, int y, t_data *data)
 {
 	int		iter;
 	double	fx;
@@ -60,7 +60,51 @@ int	get_iter(int x, int y, t_data *data)
 	return (iter);
 }
 
-void	mandelbrot(t_data *data)
+int	julia(int x, int y, t_data *data)
+{
+	int		iter;
+	double	zx;
+	double	zy;
+	double	temp;
+
+	zx = convert_x(x, data) + data->xoffset;
+	zy = convert_y(y, data) + data->yoffset;
+	iter = 0;
+	while (zx * zx + zy * zy <= 4 && iter < data->max_iter)
+	{
+		temp = zx * zx - zy * zy;
+		zy = 2 * zx * zy + data->cy;
+		zx = temp + data->cx;
+		iter++;
+	}
+	return (iter);
+}
+
+int	tricorn(int x, int y, t_data *data)
+{
+	int		iter;
+	double	zx;
+	double	zy;
+	double	tx;
+	double	ty;
+	double	temp;
+
+	zx = convert_x(x, data) + data->xoffset;
+	zy = convert_y(y, data) + data->yoffset;
+	tx = zx;
+	ty = zy;
+	iter = 0;
+	while (zx * zx + zy * zy <= 4 && iter < data->max_iter)
+	{
+		temp = zx * zx - zy * zy + tx;
+		zy = -2 * zx * zy + ty;
+		zx = temp;
+		iter++;
+	}
+	return (iter);
+}
+
+void	draw_fract(t_data *data)
 {
 	int		x;
 	int		y;
@@ -72,7 +116,8 @@ void	mandelbrot(t_data *data)
 		while (y < data->height)
 		{
 			mlx_put_pixel(data->img, x, y, convert_to_color
-				(get_iter(x, y, data), data->max_iter, data->shift, data->palette));
+				(data->fract->type(x, y, data),
+					data->max_iter, data->shift, data->palette));
 			y++;
 		}
 		x++;
