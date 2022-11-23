@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 23:58:13 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/24 00:04:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/24 00:36:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	zoom_hook(double xdelta, double ydelta, void *param)
 	float	x_bef;
 	float	y_bef;
 
+	xdelta = 0;
 	data = param;
 	x_bef = get_convmouse_x(data);
 	y_bef = get_convmouse_y(data);

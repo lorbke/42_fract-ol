@@ -6,14 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:35 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/24 00:12:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/24 00:33:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-// use linker command (more performance because smaller binary)
-// check opengl path in makefile
 
 void	ps_print_error(void)
 {
