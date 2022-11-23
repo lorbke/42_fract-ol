@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:12:03 by lorbke            #+#    #+#             */
-/*   Updated: 2022/11/24 00:12:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2022/11/24 00:17:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ unsigned int	wiki_palette(int n);
 unsigned int	convert_to_color(int n, int max, unsigned char shift,
 					unsigned int (*palette)(int));
 
-// fractal
+// fractals
 int				mandelbrot(int x, int y, t_data *data);
 int				julia(int x, int y, t_data *data);
 int				tricorn(int x, int y, t_data *data);

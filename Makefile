@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:02:15 by lorbke            #+#    #+#              #
-#    Updated: 2022/11/24 00:11:36 by lorbke           ###   ########.fr        #
+#    Updated: 2022/11/24 00:26:11 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ default: makedir all
 ${NAME}: $(OBJ)
 	@make -C $(MLX_PATH)
 	@make -C $(LFT_PATH)
-	${CC} ${FLAGS} $(OBJ) ${MLX_PATH}/${MLX_AR} ${LFT_PATH}/${LFT_AR} $(GL_FLAG) -L$(GL_AR) -o ${NAME}
+	${CC} ${FLAGS} $(OBJ) -L$(MLX_PATH) -lmlx42 -L$(LFT_PATH) -lft $(GL_FLAG) -L$(GL_AR) -o ${NAME}
 	@echo "make: fractol success!"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
