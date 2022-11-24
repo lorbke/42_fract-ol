@@ -99,6 +99,7 @@ void	zoom_hook(double xdelta, double ydelta, void *param)
 		data->scale *= 1.1;
 		data->shift -= 5;
 	}
+	xdelta++;
 	data->xoffset += x_bef - get_convmouse_x(data);
 	data->yoffset += y_bef - get_convmouse_y(data);
 }
